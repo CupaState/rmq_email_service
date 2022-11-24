@@ -5,6 +5,7 @@ import (
 	"os"
 
 	config "rmq_service/config"
+	"rmq_service/internal/server"
 	"rmq_service/pkg/jaeger"
 	logger "rmq_service/pkg/logger"
 	"rmq_service/pkg/mailer"
@@ -60,5 +61,8 @@ func main() {
 
 	mailDialer := mailer.NewMailDialer(cfg)
 	appLogger.Info("Mail dialer connected")
-	
+
+	s := server.NewEmailServer(amqpConn, appLogger, cfg, mailDialer, psqlDB)
+
+	log.Fatal(s.Run())
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 	"github.com/opentracing/opentracing-go"
-	"google.golang.org/protobuf/internal/errors"
+	"github.com/pkg/errors"
 )
 
 // Emails Repository

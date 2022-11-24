@@ -6,7 +6,7 @@ import (
 	"gopkg.in/gomail.v2"
 )
 
-// New Mail dialer
+// MailDialer constructor
 func NewMailDialer(cfg *config.Config) *gomail.Dialer {
 	return gomail.NewDialer(cfg.Smtp.Host, cfg.Smtp.Port, cfg.Smtp.User, cfg.Smtp.Password)
 }

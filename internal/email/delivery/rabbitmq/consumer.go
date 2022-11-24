@@ -147,7 +147,7 @@ func (c *EmailsConsumer) worker(ctx context.Context, messages <-chan amqp.Delive
 
 		incomingMessages.Inc()
 
-		err := c.emailUC.SendEmail(ctx, delivery.Body)
+		err := c.emailUC.SendEmails(ctx, delivery.Body)
 		if err != nil {
 			if err := delivery.Reject(false); err != nil {
 				c.logger.Errorf("Error delivery.Reject: %v", err)
