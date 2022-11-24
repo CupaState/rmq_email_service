@@ -40,7 +40,7 @@ run-linter:
 
 # ==============================================================================
 # Go migrate PostgreSQL
-DB_NAME mails_db
+DB_NAME = mails_db
 
 force:
 	migrate -database postgres://postgres:postgres@localhost:5432/$(DB_NAME)?sslmode=disable -path migrations force 1
