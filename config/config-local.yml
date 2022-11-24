@@ -3,8 +3,8 @@ server:
   Port: :5000
   PprofPort: :5555
   Mode: Development
-  JwtSecretKey: cupastate-jwt-token
-  CookieName: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2OTMyMDc0NiwiaWF0IjoxNjY5MzIwNzQ2fQ.6fxDv-cb9uJhWv2EmhyCAr3fvgbz3UaIXgJ4d5YpsvU
+  JwtSecretKey: eyJhbGciOiJIUzI1NiJ9.
+  CookieName: eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2OTMyMDc0NiwiaWF0IjoxNjY5MzIwNzQ2fQ.6fxDv-cb9uJhWv2EmhyCAr3fvgbz3UaIXgJ4d5YpsvU
   ReadTimeout: 5
   WriteTimeout: 5
   SSL: true
@@ -23,13 +23,16 @@ Smtp:
   Password: 5nC7JXYNv3iH4q8
 
 rabbitmq:
-  Host: rabbitmq
+  Host: localhost
   Port: 5672
   User: guest
   Password: guest
   Exchange: emails-exchange
   Queue: emails-queue
   RoutingKey: emails-routing-key
+  ConsumerTag: emails-consumer
+  WorkerPoolSize: 24
+
 
 logger:
   Development: true
@@ -39,8 +42,8 @@ logger:
   Level: info
 
 postgres:
-  PostgresqlHost: postgresql
-  PostgresPort: 5432
+  PostgresqlHost: localhost
+  PostgresqlPort: 5432
   PostgresqlUser: postgres
   PostgresqlPassword: postgres
   PostgresqlDbname: mails_db
@@ -48,7 +51,7 @@ postgres:
   PgDriver: pgx
 
 redis:
-  RedisAddr: redis:6379
+  RedisAddr: localhost:6379
   RedisPassword:
   RedisDb: 0
   RedisDefaultdb: 0
@@ -59,7 +62,7 @@ redis:
   DB: 0
 
 cookie:
-  Name: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2OTMyMDc0NiwiaWF0IjoxNjY5MzIwNzQ2fQ.6fxDv-cb9uJhWv2EmhyCAr3fvgbz3UaIXgJ4d5YpsvU
+  Name: eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2OTMyMDc0NiwiaWF0IjoxNjY5MzIwNzQ2fQ.6fxDv-cb9uJhWv2EmhyCAr3fvgbz3UaIXgJ4d5YpsvU
   MaxAge: 86400
   Secure: false
   HttpOnly: true
@@ -71,7 +74,14 @@ session:
 
 metrics:
   Url: 0.0.0.0:7070
-  ServiceName: mail_microservice
+  ServiceName: auth_microservice
+
+aws:
+  Endpoint: 127.0.0.1:9000
+  MinioAccessKey: minio
+  MinioSecretKey: minio123
+  UseSSL: false
+  MinioEndpoint: http://127.0.0.1:9000
 
 jaeger:
   Host: localhost:6831
