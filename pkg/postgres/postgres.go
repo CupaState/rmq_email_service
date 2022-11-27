@@ -5,6 +5,7 @@ import (
 	"rmq_service/config"
 	"time"
 
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -26,7 +27,7 @@ func NewPsqlDB(cfg *config.Config) (*sqlx.DB, error) {
 		cfg.Postgres.DBname,
 	)
 
-	db, err := sqlx.Connect(cfg.Postgres.Driver, dataSourceName)
+	db, err := sqlx.Connect("pgx", dataSourceName)
 	if err != nil {
 		return nil, err
 	}

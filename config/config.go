@@ -159,12 +159,15 @@ func ParseConfig(v *viper.Viper) (*Config, error) {
 		log.Printf("unable to decode into struct, %v", err)
 		return nil, err
 	}
+	
+	log.Println("OLEG SOBAKA: ", c.Logger)
 
 	return &c, nil
 }
 
 func GetConfig(confPath string) (*Config, error) {
 	cfgFile, err := LoadConfig(confPath)
+	//log.Println("CUPA2", cfgFile)
 	if err != nil {
 		return nil, err
 	}

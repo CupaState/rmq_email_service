@@ -3,8 +3,8 @@ server:
   Port: :5000
   PprofPort: :5555
   Mode: Development
-  JwtSecretKey: eyJhbGciOiJIUzI1NiJ9.
-  CookieName: eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2OTMyMDc0NiwiaWF0IjoxNjY5MzIwNzQ2fQ.6fxDv-cb9uJhWv2EmhyCAr3fvgbz3UaIXgJ4d5YpsvU
+  JwtSecretKey: jwt-secret-key
+  CookieName: jwt-token
   ReadTimeout: 5
   WriteTimeout: 5
   SSL: true
@@ -19,8 +19,8 @@ server:
 Smtp:
   Host: smtp.gmail.com
   Port: 465
-  User: cupastate@gmail.com
-  Password: 5nC7JXYNv3iH4q8
+  User: user
+  Password: password
 
 rabbitmq:
   Host: localhost
@@ -62,7 +62,7 @@ redis:
   DB: 0
 
 cookie:
-  Name: eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2OTMyMDc0NiwiaWF0IjoxNjY5MzIwNzQ2fQ.6fxDv-cb9uJhWv2EmhyCAr3fvgbz3UaIXgJ4d5YpsvU
+  Name: jwt-token
   MaxAge: 86400
   Secure: false
   HttpOnly: true

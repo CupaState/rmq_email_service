@@ -59,24 +59,23 @@ func (l *apiLogger) getLoggerLevel(cfg *config.Config) zapcore.Level {
 // Init Logger
 func (l *apiLogger) InitLogger() {
 	logLevel := l.getLoggerLevel(l.cfg)
-	logWriter := zapcore.AddSync(os.Stderr)
-
+	logFile, _ := os.OpenFile("log.json", os.O_CREATE | os.O_APPEND | os.O_WRONLY, 0644)
+	logWriter := zapcore.AddSync(logFile)
+	
 	var encoderCfg zapcore.EncoderConfig
 	if l.cfg.Server.Mode == "Development" {
 		encoderCfg = zap.NewDevelopmentEncoderConfig()
 	} else {
 		encoderCfg = zap.NewProductionEncoderConfig()
 	}
-
+		
 	var encoder zapcore.Encoder
 	encoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
 	core := zapcore.NewCore(encoder, logWriter, zap.NewAtomicLevelAt(logLevel))
 	logger := zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1))
-
+	
 	l.sugarLogger = logger.Sugar()
-	if err := l.sugarLogger.Sync(); err != nil {
-		l.sugarLogger.Error(err)
-	}
+	l.sugarLogger.Sync()
 }
 
 // Logger methods

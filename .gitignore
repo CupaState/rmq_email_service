@@ -21,4 +21,5 @@ go.sum
 # vendor/
 
 pgdata
+pg_data
 mail.json
